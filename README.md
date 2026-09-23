@@ -69,9 +69,9 @@ New courses, learning resources, quizzes, projects, and features may be added ov
 
 Suggestions and improvements are welcome. If you find an issue or have an idea for improving the platform, feel free to create an issue or submit a pull request.
 
-⭐ Support
+⭐Support
 
-If you find this project useful, consider giving the repository a ⭐ on GitHub.
+If you find this project useful, consider giving the repository a on GitHub.
 
 
 Atif Skills Hub — Learn Skills. Build Your Future. Get Certified.
