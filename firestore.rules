@@ -1,0 +1,115 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'atifhuss773@gmail.com' ||
+        request.auth.token.email == 'dostdar.cui@gmail.com' ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin')
+      );
+    }
+
+    match /users/{userId} {
+      allow read: if true;
+      allow create, update: if true;
+      allow delete: if isAdmin();
+    }
+
+    match /accountSecurity/{docId} {
+      allow read, write: if true;
+    }
+
+    match /courses/{courseId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    match /modules/{moduleId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    match /lessons/{lessonId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    match /quizzes/{quizId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    match /questions/{questionId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    match /enrollments/{enrollmentId} {
+      allow read, write: if true;
+    }
+
+    match /progress/{progressId} {
+      allow read, write: if true;
+    }
+
+    match /quizAttempts/{attemptId} {
+      allow read, write: if true;
+    }
+
+    match /certificates/{certId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    match /certificateSettings/{settingId} {
+      allow read, write: if true;
+    }
+
+    match /certificateTemplates/{templateId} {
+      allow read, write: if true;
+    }
+
+    match /collaborations/{collabId} {
+      allow read, write: if true;
+    }
+
+    match /collaborationSettings/{settingId} {
+      allow read, write: if true;
+    }
+
+    match /authorizedEmails/{emailId} {
+      allow read, write: if true;
+    }
+
+    match /emailLogs/{logId} {
+      allow read, write: if true;
+    }
+
+    match /student_records/{recordId} {
+      allow read, write: if true;
+    }
+
+    match /courseYouTubeVideos/{videoId} {
+      allow read, write: if true;
+    }
+
+    match /courseYouTubePlaylists/{playlistId} {
+      allow read, write: if true;
+    }
+
+    match /youtubeSettings/{settingId} {
+      allow read, write: if true;
+    }
+  }
+}
+

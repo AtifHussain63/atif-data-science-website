@@ -1,0 +1,6 @@
+{
+  "name": "Atif Skills Hub",
+  "description": "Online learning and certification platform for Data Science, AI, Programming, Data Analytics and Digital Skills. Learn practical skills, complete courses, and earn verifiable certificates.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

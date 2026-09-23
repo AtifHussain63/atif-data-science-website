@@ -1,0 +1,186 @@
+{
+  "entities": {
+    "users": {
+      "title": "User",
+      "description": "User profile with role, studentId, and status",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "studentId": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "country": { "type": "string" },
+        "profileImage": { "type": "string" },
+        "role": { "type": "string", "enum": ["student", "admin"] },
+        "status": { "type": "string", "enum": ["active", "suspended"] },
+        "createdAt": { "type": "string" },
+        "lastLogin": { "type": "string" }
+      },
+      "required": ["uid", "name", "email", "role", "status"]
+    },
+    "courses": {
+      "title": "Course",
+      "description": "Course information",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "difficulty": { "type": "string" },
+        "duration": { "type": "string" },
+        "instructor": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "passingPercentage": { "type": "number" },
+        "published": { "type": "boolean" },
+        "certificateTemplateId": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "title", "category", "difficulty"]
+    },
+    "certificateTemplates": {
+      "title": "CertificateTemplate",
+      "description": "Custom uploaded certificate designs (Canva/Photoshop/Illustrator) and dynamic field positioning configuration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "description": { "type": "string" },
+        "isDefault": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["active", "archived"] },
+        "fields": { "type": "array" },
+        "includeWebsiteLogo": { "type": "boolean" },
+        "includeCollabLogo": { "type": "boolean" },
+        "includeSignature": { "type": "boolean" },
+        "includePartnerSignature": { "type": "boolean" },
+        "aspectRatio": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "imageUrl", "isDefault", "fields"]
+    },
+    "certificates": {
+      "title": "Certificate",
+      "description": "Earned certificates with verification info",
+      "type": "object",
+      "properties": {
+        "certificateId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "studentEmail": { "type": "string" },
+        "courseId": { "type": "string" },
+        "courseName": { "type": "string" },
+        "completionDate": { "type": "string" },
+        "verificationUrl": { "type": "string" },
+        "status": { "type": "string", "enum": ["VALID", "REVOKED"] },
+        "createdAt": { "type": "string" },
+        "templateId": { "type": "string" },
+        "templateImageUrl": { "type": "string" },
+        "templateFields": { "type": "array" },
+        "logoUrl": { "type": "string" },
+        "signatureUrl": { "type": "string" },
+        "authorizedName": { "type": "string" }
+      },
+      "required": ["certificateId", "studentId", "studentName", "courseId", "courseName", "status"]
+    },
+    "collaborations": {
+      "title": "Collaboration",
+      "description": "Collaborations and educational partner organizations",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "inactive"] },
+        "websiteUrl": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "category", "status"]
+    },
+    "authorizedEmails": {
+      "title": "AuthorizedEmailAccount",
+      "description": "Authorized email accounts for support and platform administration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "type": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "inactive"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "type", "status"]
+    },
+    "emailLogs": {
+      "title": "EmailLog",
+      "description": "Record of sent test emails and broadcasts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "senderEmail": { "type": "string" },
+        "senderName": { "type": "string" },
+        "recipientEmail": { "type": "string" },
+        "subject": { "type": "string" },
+        "message": { "type": "string" },
+        "emailType": { "type": "string" },
+        "status": { "type": "string" },
+        "sentAt": { "type": "string" }
+      },
+      "required": ["id", "senderEmail", "recipientEmail", "subject", "sentAt"]
+    },
+    "student_records": {
+      "title": "StudentRecord",
+      "description": "Automatic student course progress, 50-MCQ quiz score, and certificate data record for Excel database",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentUid": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "email": { "type": "string" },
+        "courseId": { "type": "string" },
+        "courseName": { "type": "string" },
+        "enrollmentDate": { "type": "string" },
+        "courseStatus": { "type": "string" },
+        "courseProgressPercentage": { "type": "number" },
+        "totalLessons": { "type": "number" },
+        "completedLessons": { "type": "number" },
+        "quizScore": { "type": "string" },
+        "quizPercentage": { "type": "number" },
+        "quizResult": { "type": "string" },
+        "certificateStatus": { "type": "string" },
+        "certificateId": { "type": "string" },
+        "certificatePercentage": { "type": "number" },
+        "certificateIssueDate": { "type": "string" },
+        "lastActivity": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "studentId", "studentName", "email", "courseId", "courseName"]
+    },
+    "collaborationSettings": {
+      "title": "CollaborationSettings",
+      "description": "Global settings for institutional collaboration, partner branding, and certificate co-branding",
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "partnerName": { "type": "string" },
+        "partnerEmail": { "type": "string" },
+        "collaborationType": { "type": "string" },
+        "description": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "mainLogoUrl": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["enabled", "partnerName", "partnerEmail", "collaborationType"]
+    }
+  }
+}
